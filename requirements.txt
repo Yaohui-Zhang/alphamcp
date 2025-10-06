@@ -98,8 +98,5 @@ hatchling
 grpcio-tools<=1.67.1
 importlib-resources
 
-# Optional: For scripts functionality
-pyranges
-
 # AlphaGenome package
 alphagenome==0.2.0
