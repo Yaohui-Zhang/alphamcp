@@ -80,6 +80,22 @@ mcp.mount(essential_commands_mcp)
 # mcp.mount(variant_scoring_ui_mcp)
 # mcp.mount(visualization_modality_tour_mcp)
 
+from fastmcp.server import Request
+from fastmcp.server import MCPTool
+
+@mcp.custom_route("/debug/tools", methods=["GET"])
+async def list_tools_debug(request: Request):
+    tools = mcp._tool_manager.list_tools()
+    return [
+        MCPTool(
+            name=info.name,
+            description=info.description,
+            inputSchema=info.parameters,
+            annotations=info.annotations,
+        )
+        for info in tools
+    ]
+
 # Run the MCP server
 if __name__ == "__main__":
   mcp.run(show_banner=False)
